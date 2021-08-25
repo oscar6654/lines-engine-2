@@ -12,7 +12,7 @@ module Lines
     end
   
     def create
-      @user = Lines::User.find_by(email: params[:password_reset][:email].downcase)
+      @user = User.find_by(email: params[:password_reset][:email].downcase)
       if @user
         @user.create_reset_digest
         @user.send_password_reset_email
@@ -31,9 +31,9 @@ module Lines
       elsif wrong_password_confirmation?
         flash.now[:error] = "Password confirmation does not match."
         render 'edit'
-      elsif @user.update_attributes(user_params)
+      elsif @user.update(user_params)
         # deletr reset_digest and reset_sent_at
-        @user.update_attributes(reset_digest: nil, reset_sent_at: nil)        
+        @user.update(reset_digest: nil, reset_sent_at: nil)        
         flash[:success] = "Password has been reset. You can now log in with the new password."
         redirect_to new_session_path
       else
@@ -67,7 +67,7 @@ module Lines
       end
 
       def get_user
-        @user = Lines::User.find_by(email: params[:email])
+        @user = User.find_by(email: params[:email])
       end
 
       # Confirms a valid user.
@@ -79,3 +79,4 @@ module Lines
 
   end
 end
+
