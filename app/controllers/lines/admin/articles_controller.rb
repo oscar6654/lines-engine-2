@@ -8,9 +8,7 @@ require_dependency "lines/admin/application_controller"
 
 module Lines
   module Admin
-
     class ArticlesController < ApplicationController
-
       autocomplete :tag, :name, class_name: 'ActsAsTaggableOn::Tag'
       before_action :process_base64_upload, only: [:create, :update]
 
@@ -18,7 +16,7 @@ module Lines
       # <tt>@articles_published</tt> to distinguish between published and
       # unpublished articles
       def index
-        @articles = Lines::Article.order('published ASC, published_at DESC, created_at DESC').page(params[:page]).per(25)
+        @articles = Article.order('published ASC, published_at DESC, created_at DESC').page(params[:page]).per(25)
         @articles_unpublished = @articles.select{|a| a.published == false}
         @articles_published = @articles.select{|a| a.published == true}
         respond_to do |format|
@@ -28,7 +26,7 @@ module Lines
 
       # GET /admin/articles/1
       def show
-        @article = Lines::Article.friendly.find(params[:id])
+        @article = Article.friendly.find(params[:id])
         @first_page = true
 
         respond_to do |format|
@@ -47,12 +45,12 @@ module Lines
 
       # GET /admin/articles/1/edit
       def edit
-        @article = Lines::Article.friendly.find(params[:id])
+        @article = Article.friendly.find(params[:id])
       end
 
       # POST /admin/articles
       def create
-        @article = Lines::Article.new(article_params)
+        @article = Article.new(article_params)
 
         respond_to do |format|
           if @article.save
@@ -66,7 +64,7 @@ module Lines
       # PUT /admin/articles/1
       # TODO: Very much is happening here. Move deletion of hero_image to the article model
       def update
-        @article = Lines::Article.friendly.find(params[:id])
+        @article = Article.friendly.find(params[:id])
         a_params = article_params
 
         # replace picture_path with the new uploaded file
