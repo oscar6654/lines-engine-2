@@ -6,12 +6,12 @@ module Lines
 
     class PicturesController < ApplicationController
       def create
-        @picture = Lines::Picture.create(picture_params)
+        @picture = Picture.create(picture_params)
       end
 
       # PUT /admin/pictures/1
       def update
-        @picture = Lines::Picture.find(params[:id])
+        @picture = Picture.find(params[:id])
 
         respond_to do |format|
           if @picture.update(picture_params[:picture])
@@ -24,7 +24,7 @@ module Lines
 
       # Deletes a picture. Only responds to JS requests.
       def destroy
-        @picture = Lines::Picture.find(params[:id])
+        @picture = Picture.find(params[:id])
         @picture.destroy
 
         respond_to do |format|

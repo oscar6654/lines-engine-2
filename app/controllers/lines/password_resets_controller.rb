@@ -12,7 +12,7 @@ module Lines
     end
 
     def create
-      @user = Lines::User.find_by(email: params[:password_reset][:email].downcase)
+      @user = User.find_by(email: params[:password_reset][:email].downcase)
       if @user
         @user.create_reset_digest
         @user.send_password_reset_email
@@ -41,9 +41,7 @@ module Lines
       end
     end
 
-
     private
-
       # Use strong_params
       def user_params
         params.require(:user).permit(:email, :password, :password_confirmation)
@@ -67,7 +65,7 @@ module Lines
       end
 
       def get_user
-        @user = Lines::User.find_by(email: params[:email])
+        @user = User.find_by(email: params[:email])
       end
 
       # Confirms a valid user.
@@ -76,6 +74,5 @@ module Lines
           redirect_to root_url
         end
       end
-
   end
 end
