@@ -39,6 +39,6 @@ module Lines
           params.fetch(:picture, {}).permit(:image)
         end
     end
-  
+
   end
 end

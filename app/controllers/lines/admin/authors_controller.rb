@@ -55,7 +55,7 @@ module Lines
           redirect_to admin_authors_url
         else
           @authors = Author.all
-          render "index" 
+          render "index"
         end
       end
 

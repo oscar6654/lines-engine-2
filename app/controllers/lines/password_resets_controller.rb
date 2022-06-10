@@ -10,7 +10,7 @@ module Lines
 
     def new
     end
-  
+
     def create
       @user = User.find_by(email: params[:password_reset][:email].downcase)
       if @user
@@ -33,17 +33,15 @@ module Lines
         render 'edit'
       elsif @user.update(user_params)
         # deletr reset_digest and reset_sent_at
-        @user.update(reset_digest: nil, reset_sent_at: nil)        
+        @user.update(reset_digest: nil, reset_sent_at: nil)
         flash[:success] = "Password has been reset. You can now log in with the new password."
         redirect_to new_session_path
       else
         render 'edit'
       end
-    end      
-
+    end
 
     private
-
       # Use strong_params
       def user_params
         params.require(:user).permit(:email, :password, :password_confirmation)
@@ -76,7 +74,5 @@ module Lines
           redirect_to root_url
         end
       end
-
   end
 end
-

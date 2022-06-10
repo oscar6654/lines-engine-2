@@ -3,12 +3,10 @@
 require_dependency "lines/application_controller"
 
 module Lines
-
   class ArticlesController < ApplicationController
-
     layout 'lines/application'
 
-    KEYWORDS = CONFIG[:keywords]
+    KEYWORDS   = CONFIG[:keywords]
     SITE_TITLE = CONFIG[:title]
 
     # Lists all published articles.
@@ -22,13 +20,13 @@ module Lines
           else
             @articles = Lines::Article.published.page(params[:page].to_i).padding(1)
           end
-          
+
           if @articles.first_page?
             if @first_article = Article.published.first
               @first_article.teaser = nil unless @first_article.teaser.present?
             end
           end
-          
+
           set_meta_tags title: SITE_TITLE,
                         description: CONFIG[:meta_description],
                         keywords: KEYWORDS,
@@ -68,5 +66,4 @@ module Lines
     end
 
   end
-
 end
