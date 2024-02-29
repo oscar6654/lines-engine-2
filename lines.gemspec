@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bcrypt-ruby', '>= 3.0.0'
   s.add_runtime_dependency 'i18n', '>= 0.7.0'
   s.add_runtime_dependency 'sprockets-rails', '< 4'
-  s.add_runtime_dependency 'rails', ['>= 3', '< 7']
+  s.add_runtime_dependency 'rails', ['>= 3', '< 8']
 
   s.add_development_dependency 'mysql2'
   s.add_development_dependency 'rspec-rails', '~> 2.14.2', '< 3'
